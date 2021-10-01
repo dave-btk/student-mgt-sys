@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% load static %}
+
+    <title>Profile</title>
+  </head>
+  <body>
+    <div class="container-md text-center">
+      <h1>Welcome to profile, {{user}}</h1>
+      <br>
+      <a href="{% url 'logout' %}" class="btn btn-sm btn-outline-dark">Logout User</a>
+      <a href="{% url 'student_home' %}" class="btn btn-sm btn-outline-danger">Go Back</a>
+      <a href="{% url 'student_update' %}" class="btn btn-sm btn-outline-primary">Update Profile</a>
+      <a href="{% url 'student_leave_apply' %}" class="btn btn-sm btn-outline-primary">Apply for Leave</a>
+      <a href="{% url 'student_feedback' %}" class="btn btn-sm btn-outline-primary">Give Feedback/Complaint/Suggestion</a>
+    </div>
+    <br>
+    <br>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <div class="container-sm">
+      {% if messages %}
+            {% for message in messages %}
+            <h5 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h5>
+            {% endfor %}
+            <hr>
+      {% endif %}
+    </div>
+
+    <div class="container-sm">
+      <h5 class="text-capitalize">Student Name : {{student.admin}}</h5>
+      <h5 class="text-capitalize">Gender : {{student.gender}}</h5>
+      <h5 class="text-capitalize">Student Picture : <img class="rounded" style="width:200px;" src="{{student.profile_pic}}"></h5>
+      <h5 class="text-capitalize">Address : {{student.address}}</h5>
+      <h5 class="text-capitalize">Course Enroled : {{student.course_id.course_name}}</h5>
+      <h5 class="text-capitalize">Session Year : {{student.session_year_id.session_start_year}} - {{student.session_year_id.session_end_year}}</h5>
+      <h5 class="text-capitalize">Date Enrolled : {{student.created_at}}</h5>
+    </div>
+    <br>
+      <button class="btn btn-primary btn-sm" style=" margin-left: 60px;" id="attendance_btn" onclick="showAttendance()">Show Attendance</button>
+    <br>
+    <div class="container-sm d-none" style=" padding: 20px;" id="attendance_id">
+      <h5>Your Attendance :</h5>
+      <ol>
+        {% for att in report %}
+          <h5><li>Date : {{att.attendance_date}} <br>
+          Status : {{att.status}}</li></h5>
+        {% endfor %}
+      </ol>
+      {% if report_count == 1 %}
+        <h5>Total Attendance this month : {{report_count}}-Day  </h5>
+      {% else %}
+        <h5>Total Attendance this month : {{report_count}}-Days  </h5>
+      {% endif %}
+    </div>
+
+
+    <script type="text/javascript" src="{% static 'js/social.js' %}"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
