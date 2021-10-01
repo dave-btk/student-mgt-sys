@@ -18,7 +18,8 @@ def user_signup(request):
         if fm.is_valid():
             fm.save()
             print("SUCCESS!!")
-            return HttpResponseRedirect('/signup/')
+            fm = SignUpUsers()
+            return render(request, 'signup.html', {'fm': fm})
 
     fm = SignUpUsers()
     return render(request, 'signup.html', {'fm': fm})
