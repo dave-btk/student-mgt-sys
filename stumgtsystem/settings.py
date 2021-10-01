@@ -86,13 +86,18 @@ WSGI_APPLICATION = 'stumgtsystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default="postgres://psxzyigkconyad:b3d715587c93ff43b13a9d8a36517d5975ab4a3bba55ba49b9b45ebf75e7abe2@ec2-100-24-169-249.compute-1.amazonaws.com:5432/df218raed6sep1"
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
