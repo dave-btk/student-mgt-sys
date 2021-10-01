@@ -10,8 +10,8 @@ import datetime
 
 
 class CustomUser(AbstractUser):
-    user_type_data = ((1, "HOD"), (2, "Staff"), (3, "Student"))
-    user_type = models.IntegerField(default=1, choices=user_type_data, max_length=10)
+    user_type_data = ((2, "Staff"), (3, "Student"))
+    user_type = models.IntegerField(default=2, choices=user_type_data, max_length=10)
 
 
 class SessionYearModel(models.Model):
