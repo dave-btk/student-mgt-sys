@@ -16,8 +16,8 @@ def user_signup(request):
     if request.method == "POST":
         fm = SignUpUsers(request.POST)
         if fm.is_valid():
-            print("SUCCESS!!")
             fm.save()
+            print("SUCCESS!!")
             return HttpResponseRedirect('/signup/')
 
     fm = SignUpUsers()
